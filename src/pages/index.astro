@@ -1,0 +1,91 @@
+---
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/inter';
+import '@fontsource/jetbrains-mono/400.css';
+import '../styles/global.css';
+import { profile, experience, skills, education } from '../data/resume';
+
+const description = `${profile.name}, ${profile.title}. ${profile.about}`;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={Astro.site} />
+		<meta name="generator" content={Astro.generator} />
+		<title>{profile.name} · {profile.title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={`${profile.name} · ${profile.title}`} />
+		<meta property="og:description" content={profile.about} />
+		<meta property="og:url" content={Astro.site} />
+		<meta property="og:type" content="profile" />
+	</head>
+	<body>
+		<main>
+			<header class="intro">
+				<h1>{profile.name}</h1>
+				<p class="title">{profile.title}</p>
+				<p class="about">{profile.about}</p>
+				<ul class="links">
+					{profile.links.map((link) => (
+						<li><a href={link.href} aria-label={link.label}>{link.text}</a></li>
+					))}
+				</ul>
+			</header>
+
+			<section aria-labelledby="experience">
+				<h2 id="experience">Experience</h2>
+				{experience.map((job) => (
+					<article class="job">
+						<div class="job-head">
+							<h3>{job.company}</h3>
+							<span class="dates">{job.dates}</span>
+						</div>
+						{job.roles.length > 1 ? (
+							<ul class="roles">
+								{job.roles.map((role) => (
+									<li><span>{role.title}</span> <span class="dates">{role.dates}</span></li>
+								))}
+							</ul>
+						) : (
+							<p class="role">{job.roles[0].title}</p>
+						)}
+						<ul class="highlights">
+							{job.highlights.map((item) => <li>{item}</li>)}
+						</ul>
+					</article>
+				))}
+			</section>
+
+			<section aria-labelledby="skills">
+				<h2 id="skills">Skills</h2>
+				<dl class="skills">
+					{skills.map((s) => (
+						<div>
+							<dt>{s.group}</dt>
+							<dd>
+								<ul class="tags">{s.items.map((item) => <li>{item}</li>)}</ul>
+							</dd>
+						</div>
+					))}
+				</dl>
+			</section>
+
+			<section aria-labelledby="education">
+				<h2 id="education">Education</h2>
+				{education.map((e) => (
+					<div>
+						<div class="job-head">
+							<h3>{e.school}</h3>
+							<span class="dates">{e.dates}</span>
+						</div>
+						<p class="role">{e.degree}</p>
+					</div>
+				))}
+			</section>
+		</main>
+		<footer>Built with Astro · Hosted on GitHub Pages</footer>
+	</body>
+</html>
