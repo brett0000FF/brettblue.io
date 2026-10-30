@@ -3,6 +3,7 @@ import '@fontsource-variable/fraunces';
 import '@fontsource-variable/inter';
 import '@fontsource/jetbrains-mono/400.css';
 import '../styles/global.css';
+import Fabric from '../components/Fabric.astro';
 import { profile, experience, skills, education } from '../data/resume';
 
 const description = `${profile.name}, ${profile.title}. ${profile.about}`;
@@ -23,6 +24,7 @@ const description = `${profile.name}, ${profile.title}. ${profile.about}`;
 		<meta property="og:type" content="profile" />
 	</head>
 	<body>
+		<Fabric />
 		<main>
 			<header class="intro">
 				<h1>{profile.name}</h1>

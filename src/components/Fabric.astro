@@ -1,0 +1,110 @@
+---
+// Undulating line "fabric" drawn behind the intro. Decorative only.
+---
+
+<canvas class="fabric" aria-hidden="true"></canvas>
+
+<style>
+	.fabric {
+		position: absolute;
+		inset: 0 0 auto;
+		width: 100%;
+		height: 26rem;
+		pointer-events: none;
+		mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 85%);
+	}
+
+	@media (max-width: 34rem) {
+		.fabric {
+			height: 15rem;
+			mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 95%);
+		}
+	}
+</style>
+
+<script>
+	const LINES = 42;
+	const STEP = 8;
+
+	const canvas = document.querySelector<HTMLCanvasElement>('canvas.fabric')!;
+	const ctx = canvas.getContext('2d')!;
+	const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)');
+	const darkMode = matchMedia('(prefers-color-scheme: dark)');
+
+	let width = 0;
+	let height = 0;
+	let gradient: CanvasGradient;
+	let running = false;
+	let visible = true;
+	let frame = 0;
+
+	function paint() {
+		const css = getComputedStyle(document.documentElement);
+		gradient = ctx.createLinearGradient(0, 0, width, 0);
+		gradient.addColorStop(0, css.getPropertyValue('--wave-1'));
+		gradient.addColorStop(0.5, css.getPropertyValue('--wave-2'));
+		gradient.addColorStop(1, css.getPropertyValue('--wave-3'));
+	}
+
+	function resize() {
+		const dpr = Math.min(devicePixelRatio || 1, 2);
+		width = canvas.clientWidth;
+		height = canvas.clientHeight;
+		canvas.width = width * dpr;
+		canvas.height = height * dpr;
+		ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+		paint();
+		draw(performance.now());
+	}
+
+	function draw(now: number) {
+		const t = now / 1000;
+		ctx.clearRect(0, 0, width, height);
+		ctx.strokeStyle = gradient;
+		ctx.lineWidth = 1.25;
+		// Gentler waves on narrow screens.
+		const amp = Math.min(1, width / 800);
+
+		for (let i = 0; i < LINES; i++) {
+			const v = i / (LINES - 1);
+			// Lines fade toward the top and bottom edges of the band.
+			ctx.globalAlpha = 0.2 + 0.65 * Math.sin(Math.PI * v) ** 2;
+			ctx.beginPath();
+			for (let x = 0; x <= width + STEP; x += STEP) {
+				const u = x / width;
+				// A shared fold that every line follows, plus a per-line ripple.
+				const fold = Math.sin(u * 3.4 + t * 0.35) * 42 + Math.sin(u * 7.1 - t * 0.5 + 1.3) * 18;
+				const ripple = Math.sin(u * 9 + t * 0.8 + v * 6) * 7 * (0.5 + 0.5 * Math.sin(t * 0.25 + v * 4));
+				const y = height * (0.04 + 0.5 * v) + (fold * (0.4 + v) + ripple) * amp;
+				x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+			}
+			ctx.stroke();
+		}
+		ctx.globalAlpha = 1;
+	}
+
+	function loop(now: number) {
+		draw(now);
+		frame = requestAnimationFrame(loop);
+	}
+
+	function update() {
+		const shouldRun = visible && !document.hidden && !reduceMotion.matches;
+		if (shouldRun && !running) frame = requestAnimationFrame(loop);
+		if (!shouldRun && running) cancelAnimationFrame(frame);
+		running = shouldRun;
+	}
+
+	new ResizeObserver(resize).observe(canvas);
+	new IntersectionObserver(([entry]) => {
+		visible = entry.isIntersecting;
+		update();
+	}).observe(canvas);
+	document.addEventListener('visibilitychange', update);
+	reduceMotion.addEventListener('change', update);
+	darkMode.addEventListener('change', () => {
+		paint();
+		draw(performance.now());
+	});
+	update();
+</script>

@@ -5,6 +5,9 @@
 	--rule: #e3e1da;
 	--accent: #2b5fd9;
 	--tag-bg: #eef2fc;
+	--wave-1: #2b5fd9;
+	--wave-2: #7a5cf0;
+	--wave-3: #12a6c8;
 	--serif: 'Fraunces Variable', Georgia, serif;
 	--sans: 'Inter Variable', system-ui, sans-serif;
 	--mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -19,6 +22,9 @@
 		--rule: #262b36;
 		--accent: #7fa6ff;
 		--tag-bg: #1b2333;
+		--wave-1: #4f7dff;
+		--wave-2: #a68bff;
+		--wave-3: #36d0e8;
 	}
 }
 
@@ -27,6 +33,7 @@
 }
 
 body {
+	position: relative;
 	margin: 0;
 	background: var(--bg);
 	color: var(--text);
@@ -35,9 +42,10 @@ body {
 }
 
 main {
+	position: relative;
 	max-width: 44rem;
 	margin: 0 auto;
-	padding: 5rem 1.25rem 3rem;
+	padding: 9rem 1.25rem 3rem;
 }
 
 a {
@@ -194,7 +202,7 @@ h3 {
 
 @media (max-width: 34rem) {
 	main {
-		padding-top: 3rem;
+		padding-top: 10rem;
 	}
 
 	.skills div {
