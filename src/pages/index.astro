@@ -41,7 +41,7 @@ const description = `${profile.name}, ${profile.title}. ${profile.about}`;
 					<article class="job">
 						<div class="job-head">
 							<h3>{job.company}</h3>
-							<span class="dates">{job.dates}</span>
+							{job.roles.length === 1 && <span class="dates">{job.dates}</span>}
 						</div>
 						{job.roles.length > 1 ? (
 							<ul class="roles">
