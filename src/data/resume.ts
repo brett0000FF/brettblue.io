@@ -27,6 +27,7 @@ export const experience: Job[] = [
 			'Write developer documentation for OpenTelemetry and APM',
 			'Launched the Datadog Docs AI chatbot',
 			'Lead AI enablement and initiatives for the documentation team',
+			'Introduced coding agents (Claude Code, Codex) into the docs team’s workflow for drafting, reviews, and docs maintenance',
 		],
 	},
 	{
