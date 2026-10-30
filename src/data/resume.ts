@@ -67,10 +67,27 @@ export const experience: Job[] = [
 ];
 
 export const skills = [
-	{ group: 'Documentation', items: ['Docs as Code', 'Developer docs', 'Release notes', 'UX content', 'Style guides', 'Technical diagrams'] },
-	{ group: 'AI', items: ['Docs AI chatbots', 'AI enablement for writing teams'] },
-	{ group: 'Technical', items: ['OpenTelemetry', 'APM', 'Markdown', 'Git', 'Python', 'JavaScript', 'SQL', 'Liquid'] },
-	{ group: 'Tools', items: ['Astro', 'VS Code', 'GitHub', 'GitLab', 'Jira', 'Postman', 'Lucidchart'] },
+	{
+		group: 'AI for docs',
+		items: ['AI docs assistants (RAG)', 'AI writing workflows', 'AI enablement', 'LLM-ready docs (llms.txt)', 'Prompt engineering'],
+	},
+	{
+		group: 'Strategy',
+		items: ['Documentation strategy', 'Information architecture', 'Content standards', 'Style guides', 'Mentoring writers'],
+	},
+	{
+		group: 'Developer docs',
+		items: ['API & reference docs', 'Tutorials & how-tos', 'Release notes', 'Technical diagrams', 'UX writing'],
+	},
+	{
+		group: 'Docs as Code',
+		items: ['Markdown', 'Git & GitHub', 'Hugo', 'Astro', 'Docs CI/CD', 'Vale linting', 'Liquid'],
+	},
+	{
+		group: 'Domain',
+		items: ['Observability', 'OpenTelemetry', 'APM & tracing', 'Cloud & containers'],
+	},
+	{ group: 'Languages', items: ['Python', 'JavaScript', 'SQL'] },
 ];
 
 export const education = [
