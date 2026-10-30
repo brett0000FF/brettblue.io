@@ -69,7 +69,11 @@ export const experience: Job[] = [
 export const skills = [
 	{
 		group: 'AI for docs',
-		items: ['AI docs assistants (RAG)', 'AI writing workflows', 'AI enablement', 'LLM-ready docs (llms.txt)', 'Prompt engineering'],
+		items: ['AI docs assistants (RAG)', 'AI answer evaluation', 'LLM-ready docs (llms.txt)', 'AI enablement', 'Prompt engineering'],
+	},
+	{
+		group: 'AI agents',
+		items: ['Claude Code', 'OpenAI Codex', 'Agentic docs workflows', 'AGENTS.md & context files', 'MCP'],
 	},
 	{
 		group: 'Strategy',
