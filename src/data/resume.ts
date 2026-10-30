@@ -78,7 +78,7 @@ export const skills = [
 	},
 	{
 		group: 'Strategy',
-		items: ['Documentation strategy', 'Information architecture', 'Content standards', 'Style guides', 'Mentoring writers'],
+		items: ['Documentation strategy', 'Information architecture', 'Docs analytics', 'Program leadership', 'Mentoring writers'],
 	},
 	{
 		group: 'Developer docs',
@@ -90,9 +90,9 @@ export const skills = [
 	},
 	{
 		group: 'Domain',
-		items: ['Observability', 'OpenTelemetry', 'APM & tracing', 'Cloud & containers'],
+		items: ['Observability', 'OpenTelemetry', 'APM & tracing'],
 	},
-	{ group: 'Languages', items: ['Python', 'JavaScript', 'SQL'] },
+	{ group: 'Languages', items: ['Python', 'JavaScript', 'SQL', 'YAML'] },
 ];
 
 export const education = [
